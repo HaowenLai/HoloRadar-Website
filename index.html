@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- When developing, comment this tag to use relative path. -->
+  <!-- When publishing, uncomment this base tag and change to the Github repo path. -->
+  <!-- <base href="https://cdn.jsdelivr.net/gh/HaowenLai/HoloRadar-Website@latest/"> -->
+
+  <meta charset="utf-8">
+  <meta name="description" content="HoloRadar: Non-Line-of-Sight 3D Reconstruction with Radar">
+  <meta name="keywords" content="HoloRadar, 3D Reconstruction, NLOS, Non-line-of-sight, Ray Tracing, mmWave Radar, Robust Perception, Machine Learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HoloRadar: Non-Line-of-Sight 3D Reconstruction with Radar</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="icon" href="resources/images/favicon.webp">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="https://haowenlai.github.io">
+          <span class="icon"><i class="fas fa-home"></i></span>
+        </a>
+  
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">More Research</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://waves.seas.upenn.edu/projects/panoradar">PanoRadar</a>
+            <a class="navbar-item" href="https://waves.seas.upenn.edu/projects/cartoradar">CartoRadar</a>
+            <a class="navbar-item" href="https://waves.seas.upenn.edu/projects/holoradar">HoloRadar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</head>
+
+<body>
+<section class="hero" id="top">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">HoloRadar: Non-Line-of-Sight 3D Reconstruction with Radar</h1>
+          <div class="is-size-4 publication-authors">
+            <span class="author-block">
+              <a href="https://haowenlai.github.io" target="_blank">Haowen Lai</a>&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="https://zitonglan.github.io/" target="_blank">Zitong Lan</a>&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="https://www.cis.upenn.edu/~mingminz" target="_blank">Mingmin Zhao</a>
+              <br/> University of Pennsylvania
+              <span class="brmod"><strong><a href="https://neurips.cc/Conferences/2025" target="_blank">NeurIPS 2025</a></strong></span>
+              <div>
+                <img src='resources/images/NeurIPS-logo.svg' width=200px>
+              </div>
+            </span>
+          </div>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a 
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- ACM Digital Library. -->
+              <!-- <span class="link-block">
+                <a href="xxxx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-acmdl"></i>
+                  </span>
+                  <span>ACM DL</span>
+                </a>
+              </span> -->
+              <!-- Arxiv Link. -->
+              <!-- <span class="link-block">
+                <a href="xxxx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark jump-in-page" data-target="demo-video">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a 
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a 
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Dataset</span>
+                </a>
+              </span>
+              <!-- News Link. -->
+              <!-- <span class="link-block">
+                <a href="https://ai.seas.upenn.edu/news/giving-robots-superhuman-vision-using-radio-signals"
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="far fa-solid fa-newspaper"></i>
+                  </span>
+                  <span>News</span>
+                </a>
+              </span> -->
+              <!-- Slides Link. -->
+              <span class="link-block">
+                <a 
+                   class="external-link button is-normal is-rounded is-dark" target="_blank">
+                  <span class="icon">
+                      <i class="fa fa-list"></i>
+                  </span>
+                  <span>Presentation</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teaser Figure -->
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img class="teaser" src="resources/images/teaser.png" alt="Teaser Image" width="1600px">
+      <div class="has-text-justified">
+        HoloRadar leverages (a) the multi-bounce RF reflections to reconstruct the scene. We propose a two-stage pipeline for this task.
+        (b) The first stage predicts the range (travel distance) of each bounce from the noisy and low-resolution signals.
+        This emulates a "multi-return LiDAR" and extracts key points in the mirrored locations.
+        (c) The second stage maps those mirrored points to their actual locations and reconstructs the scene, (d) revealing hidden structures and humans.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Abstract -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-3">Abstract</h3>
+        <div class="content has-text-justified">
+          <p>
+            Seeing hidden structures and objects around corners is critical for robots operating in complex, cluttered environments.
+            Existing methods, however, are limited to detecting and tracking hidden objects rather than reconstructing the occluded full scene.
+            We present HoloRadar, a practical system that reconstructs both line-of-sight (LOS) and non-line-of-sight (NLOS) 3D scenes using a single mmWave radar.
+            HoloRadar uses a two-stage pipeline: the first stage generates high-resolution multi-return range images that capture both LOS and NLOS reflections,
+            and the second stage reconstructs the physical scene by mapping mirrored observations to their true locations using a physics-guided architecture that models ray interactions.
+            We deploy HoloRadar on a mobile robot and evaluate it across diverse real-world environments.
+            Our evaluation results demonstrate accurate and robust reconstruction in both LOS and NLOS regions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Paper video. -->
+<section class="section">
+  <div class="container">
+    <div id="demo-video" class="columns is-centered has-text-centered">
+      <div class="column is-three-quarters">
+        <h3 class="title is-3">Demo Video</h3>
+        <div class="publication-video">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/0UFduZmbyUA?si=neOnwpd7J6XjyA7N" title="YouTube video player"
+                  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Overview -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-3">System Overview</h3>
+        <div class="content has-text-justified">
+          <img class="teaser" src="resources/images/pipeline.png" alt="The system pipeline" width="800px"><br>
+          <p>HoloRadar uses a two stage pipeline that separates imaging from the mirroring correction.</p>
+          <ol>
+            <li><b>The first stage</b> interprets the radar signal, with an imaging model extracting both direct and hidden geometry from the RF heatmap.</li>
+            <li>This gives us range images that show the total travel distance for each bounce. They represent both LOS and NLOS points but appear at mirrored locations.</li>
+            <li><b>The second stage</b> performs spatial reasoning. This model determines the true positions of those mirrored points and refines the 3D scene.</li>
+          </ol>
+        </div>
+        <div class="content has-text-justified">
+          <img class="teaser" src="resources/images/imaging_model.png" alt="The first stage, imaging model" width="730px"><br>
+          <p>Specifically, we design a shared-encoder but separate-decoders structure for our multi-return RF imaging model.
+             The encoder processes the full heatmap and extracts a unified set of RF features.
+             Then, each of the decoders specializes in predicting the range image for its corresponding return.
+          </p>
+        </div>
+        <div class="content has-text-justified">
+          <img class="teaser" src="resources/images/scene_recon.png" alt="The second stage, scene reconstruction model" width="700px"><br>
+          <p>To build the real 3D scene, we use a ray tracing module to track how the signal travels and update where it hits, which helps us recover the real geometry.
+            The tracked locations are then used to determine the reflection path of the next return.
+            By cascading these ray tracing modules together, the reconstruction gradually reveals the hidden NLOS regions.
+            It is worth noting that our ray tracing module does not purely rely on physical modeling,
+            but combines signal processing and learnable layers to mitigate error accumulation during ray tracing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Imaging Results -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-3">Multi-return Imaging Results</h3>
+        <div class="content has-text-justified">
+          <img class="teaser" src="resources/images/imaging_result.png" alt="The multi-return RF imaging results" width="1200px"><br>
+          <p>We present the multi-return RF imaging results. The predicted range images align closely with the ground truth.
+             Our model successfully reveals NLOS structures and human (highlighted and zoomed in by white boxes) in both the 2nd and 3rd bounce images.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Scene Reconstruction Results -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-3">Scene Reconstruction Results</h3>
+        <div class="content has-text-justified">
+          <img class="teaser" src="resources/images/reconstruction_result.png" width="1100px"><br>
+          <p>We show the scene reconstruction results. Top two rows are full scene reconstruction, and bottom two rows are detailed views of each corner.
+             Green and purple points represent LOS and NLOS geometries, respectively, while dark-purple points indicate the hidden person.
+             The predicted reconstructions align closely with the ground truth, accurately capturing both hidden humans and surrounding NLOS structures.
+          </p>
+        </div>
+
+        <h4 class="title is-4">Comparison with Baselines</h4>
+        <div class="content has-text-justified">
+          <img class="teaser" src="resources/images/reconstruction_baseline.png" width="700px"><br>
+          <p>HoloRadar is compared with two end-to-end transformer-based methods.
+             Our approach produces clearer and more complete reconstructions in both LOS and NLOS areas, 
+             while the baselines exhibit noisy or incorrect structures (e.g., missing humans or closed corridors).
+          </p>
+        </div>
+
+        <h4 class="title is-4">Corner Reconstruction Details</h4>
+        <div class="columns is-centered">
+          <div class="column is-half">
+            <video autoplay loop muted playsinline preload="metadata" width="43%">
+              <source src="resources/videos/sample1_mesh_ours.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline preload="metadata" width="43%">
+              <source src="resources/videos/sample1_mesh_gt.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline preload="metadata" width="43%">
+              <source src="resources/videos/sample1_pc_ours.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline preload="metadata" width="43%">
+              <source src="resources/videos/sample1_pc_gt.mp4" type="video/mp4">
+            </video>
+            <div class="cap"><p>Example 1: Ours vs. Ground Truth</p></div>
+          </div>
+          <div class="column is-half">
+            <video autoplay loop muted playsinline preload="metadata" width="43%" class="mirrored">
+              <source src="resources/videos/sample2_mesh_ours.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline preload="metadata" width="43%" class="mirrored">
+              <source src="resources/videos/sample2_mesh_gt.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline preload="metadata" width="43%" class="mirrored">
+              <source src="resources/videos/sample2_pc_ours.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline preload="metadata" width="43%" class="mirrored">
+              <source src="resources/videos/sample2_pc_gt.mp4" type="video/mp4">
+            </video>
+            <div class="cap"><p>Example 2: Ours vs. Ground Truth</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Code and Dataset -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-3">Code and Dataset</h3>
+        <img class="teaser" src="resources/images/dataset.png" width="800px"><br>
+        <div class="content has-text-justified">
+          <p>We collect a dataset from 32 distinct corners across 5 buildings, which are constructed between 1906 and 1996 and renovated between 1973 and 2017.
+            Our dataset includes diverse corner layouts, including 21 T-shaped, 5 L-shaped, 5 cross-shaped, and 1 oblique corner at 45°. 
+            Corner width ranges from 1.33 m to 4.63 m, with a mean of 2.16 m and a standard deviation of 0.89 m. 
+            In each corner, we positioned a human subject behind the corner, out of the direct LOS, to simulate realistic NLOS imaging conditions.
+            Both the human and the robot are free to move, leading to a total of 28k distinct RF heatmap scans.</p>
+          <p>We will release code and dataset to facilitate future research in this direction.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- BibTeX citation -->
+<section class="section" id="BibTeX">
+  <div class="container">
+    <h3 class="title is-3">BibTeX</h3>
+    <div class="content has-text-justified">
+      <p>If you find <a class="jump-in-page" data-target="top">HoloRadar</a> method or dataset useful for your work, please consider citing:</p>
+    </div>
+    <pre><code>@inproceedings{holoradar,
+  title={Non-Line-of-Sight 3D Reconstruction with Radar},
+  author={Lai, Haowen and Lan, Zitong and Zhao, Mingmin},
+  booktitle={Annual Conference on Neural Information Processing Systems (NeurIPS)},
+  year={2025}
+}</code></pre>
+    <div class="content has-text-justified">
+      <br>
+      <p>If our rotating radar design inspires your work, please consider citing <a href="https://waves.seas.upenn.edu/projects/panoradar" target="_blank">PanoRadar</a>:</p>
+    </div>
+    <pre><code>@inproceedings{panoradar,
+  title={Enabling Visual Recognition at Radio Frequency},
+  author={Lai, Haowen and Luo, Gaoxiang and Liu, Yifei and Zhao, Mingmin},
+  booktitle={Proceedings of the 30th Annual International Conference on Mobile Computing and Networking (MobiCom)},
+  pages={388--403},
+  year={2024}
+}</code></pre>
+  </div>
+</section>
+
+
+<!-- Acknowledgements -->
+<section class="section" id="Acknowledgements">
+  <div class="container">
+    <h3 class="title is-3">Acknowledgments</h3>
+      <div class="is-vcentered interpolation-panel">
+        <p>This work was carried out in the <a href="https://waves.seas.upenn.edu" target="_blank">WAVES Lab</a>, University of Pennsylvania.
+          We sincerely thank the reviewers and AC for their insightful comments and suggestions.
+          We are grateful to Zhiwei Zheng for the discussion, and to Running Zhao and Xin Yang for their help in data collection.
+        </p>
+        <br/>
+        <p>This project page template is adapted from <a href="https://nerfies.github.io" target="_blank">Nerfies</a>.</p>
+      </div>
+  </div>
+</section>
+
+<br/>
+<br/>
+<br/>
+
+<!-- <footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered"></div>
+  </div>
+</footer> -->
+
+</body>
+</html>
